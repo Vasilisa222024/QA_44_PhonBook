@@ -19,12 +19,13 @@ public class RegistrationTest extends ApplicationManager {
 
     @Test
     public void registrationNegativeTest_wrongEmail_Field_email_is_empty(){
+        Assert.assertTrue(
         new HomePage(getDriver())
                 .clickbtnLoginHeader()
                 .typeloginForm("","1j3#AAa1")
                 .clickBtnRegistrationNegative()
                 .closeAllert()
-                .isTextInElementPresent_errorMessageRegistration()
+                .isTextInElementPresent_errorMessageRegistration())
 
                 ;
 

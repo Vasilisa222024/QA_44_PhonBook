@@ -14,7 +14,7 @@ import java.time.Duration;
 import static pages.BasePage.driver;
 import static pages.BasePage.setDriver;
 
-public class ContactPage {
+public class ContactPage extends BasePage{
     public ContactPage(WebDriver driver){
         setDriver(driver);
         PageFactory.initElements

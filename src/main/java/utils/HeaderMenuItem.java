@@ -1,7 +1,7 @@
 package utils;
 
 public enum HeaderMenuItem {
-    HOME("//a[@href='/home']"),
+    HOME("//a[@href='/home']"),//"a[@text()='HOME'
     ABOUT("//a[@href='/about']"),
     CONTACTS("//a[@href='/contacts']"),
     ADD("//a[@href='/add']"),

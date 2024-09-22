@@ -1,10 +1,12 @@
 package pages;
 
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.HeaderMenuItem;
+
+import java.time.Duration;
 
 public class BasePage {
     static WebDriver driver;
@@ -26,8 +28,21 @@ public class BasePage {
     }
 
     public static <T extends BasePage> T clickButtonsOnHeader(HeaderMenuItem headerMenuItem) {
-        WebElement element = driver.findElement(By.xpath(headerMenuItem.getLocator()));
-        element.click();
+        try {
+
+
+            //new Aleksey
+            WebElement element = new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.elementToBeClickable(By.xpath(headerMenuItem.getLocator())));
+
+            //HW
+            // WebElement element = driver.findElement(By.xpath(headerMenuItem.getLocator()));
+            element.click();
+
+        }catch (TimeoutException timeoutException){
+            timeoutException.printStackTrace();
+            System.out.println(" created timeoutException");
+        }
         switch (headerMenuItem) {
             case HOME -> {
                 return (T) new HomePage(driver);
@@ -46,10 +61,15 @@ public class BasePage {
                 return (T) new LoginPage(driver);
 
             }
-           default -> throw new IllegalArgumentException
+            default -> throw new IllegalArgumentException
                     ("Invalid header menu item: ");
 
         }
     }
-
+    public void closeAlert() {
+        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(ExpectedConditions.alertIsPresent());
+        System.out.println(alert.getText());
+        alert.accept();
+    }
 }

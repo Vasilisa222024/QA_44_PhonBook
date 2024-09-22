@@ -14,23 +14,33 @@ import java.time.Duration;
 import static pages.BasePage.driver;
 import static pages.BasePage.setDriver;
 
-public class ContactPage extends BasePage{
-    public ContactPage(WebDriver driver){
+public class ContactPage extends BasePage {
+    public ContactPage(WebDriver driver) {
         setDriver(driver);
         PageFactory.initElements
-                (new AjaxElementLocatorFactory(driver,10),this);
+                (new AjaxElementLocatorFactory(driver, 10), this);
     }
-    @FindBy(xpath ="//a[text()='CONTACTS']" )
-    WebElement btnContacts;
 
-    public  boolean isElementContactsPresent(){
+    @FindBy(xpath = "//a[text()='CONTACTS']")
+    WebElement btnContacts;
+    @FindBy(xpath = "//div[@class='contact-page_leftdiv__yhyke']//div[@class='contact-item_card__2SOIM'][last()]/h3")
+    WebElement lastPhoneInList;
+
+
+//    public void closeAlert() {
+//        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(3))
+//                .until(ExpectedConditions.alertIsPresent());
+//        System.out.println(alert.getText());
+//        alert.accept();
+//    }
+
+    public boolean isElementContactsPresent() {
         return btnContacts.isDisplayed();
     }
-    public void closeAlert() {
-        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(3))
-                .until(ExpectedConditions.alertIsPresent());
-        System.out.println(alert.getText());
-        alert.accept();
-    }
+
+    public boolean isLastPhoneEquals(String phone){
+       return lastPhoneInList.getText().equals(phone);}
+
+
 }
 

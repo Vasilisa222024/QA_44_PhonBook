@@ -1,15 +1,64 @@
 package pages;
 
+import dto.ContactDtoLombok;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-
-import static pages.BasePage.setDriver;
+import org.testng.Assert;
 
 public class AddPage extends BasePage{
+
+
+
     public AddPage(WebDriver driver){
         setDriver(driver);
         PageFactory.initElements
                 (new AjaxElementLocatorFactory(driver,10),this);
     }
+
+    @FindBy(xpath = "//input[@placeholder='Name']")
+    WebElement inputName;
+    @FindBy(xpath = "//input[@placeholder='Last Name']")
+    WebElement inputLastName;
+    @FindBy(xpath = "//input[@placeholder='Phone']")
+    WebElement inputPhone;
+    @FindBy(xpath = "//input[@placeholder='email']")
+    WebElement inputEmail;
+    @FindBy(xpath = "//input[@placeholder='Address']")
+    WebElement inputAddress;
+    @FindBy(xpath = "//input[@placeholder='description']")
+    WebElement inputDescription;
+    @FindBy(xpath = "//button/b")
+    WebElement btnSaveContact;
+
+    public AddPage fillContactsForm(ContactDtoLombok contact){
+        inputName.sendKeys(contact.getName());
+        inputLastName.sendKeys(contact.getLastName());
+        inputPhone.sendKeys(contact.getPhone());
+        inputEmail.sendKeys(contact.getEmail());
+        inputAddress.sendKeys(contact.getAddress());
+        inputDescription.sendKeys(contact.getDescription());
+return  this;
+    }
+//public  void clickSave(){ new method
+
+//}
+public  ContactPage clickSaveBtnContactPositive(){
+        btnSaveContact.click();
+        return new ContactPage(driver);
+}
+    public  AddPage clickSaveBtnContactNegative(){
+        btnSaveContact.click();
+        return this;
+    }
+public boolean ErrorMasegeAlirt(String tex){
+        return btnSaveContact.isDisplayed();
+}
+    public boolean ErrorWoAlirt(String tex){
+        return btnSaveContact.isDisplayed();
+    }
+
 }

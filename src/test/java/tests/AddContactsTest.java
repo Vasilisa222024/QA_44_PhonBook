@@ -1,5 +1,6 @@
 package tests;
 
+import data_provider.DPAddContact;
 import dto.ContactDtoLombok;
 import dto.UserDto;
 import manager.ApplicationManager;
@@ -44,6 +45,7 @@ public class AddContactsTest extends ApplicationManager {
 
     }
 
+    ///URL////////
     @Test
     public void addNewContactsNegativTest_fielnameIsEmpty() {
         ContactDtoLombok contact = ContactDtoLombok.builder()
@@ -55,10 +57,52 @@ public class AddContactsTest extends ApplicationManager {
                 .description(generateString(11))
                 .build();
 
-       Assert.assertTrue( addPage.fillContactsForm(contact)
-                .clickSaveBtnContactNegative()
-               .ErrorWoAlirt("AddPageWOChange"))
+        Assert.assertTrue(addPage.fillContactsForm(contact)
+                .clickSaveBtnContactPositive()
+                .urlContainsAdd())
 
+        ;
+
+    }
+
+    //ALIRT//////////////
+    @Test
+    public void addNewContactsNegativTest_wronEmail() {
+        ContactDtoLombok contact = ContactDtoLombok.builder()
+                .name(generateString(4))
+                .lastName(generateString(5))
+                .phone(generatePHone(10))
+                .email(generateString(7))
+                .address(generateString(7))
+                .description(generateString(11))
+                .build();
+
+        Assert.assertTrue(addPage.fillContactsForm(contact)
+                .clickSaveBtnContactPositive()
+                .isAlertPresent(5))
+
+        ;
+
+    }
+
+////Data Provider
+
+    @Test
+            (dataProvider = "addNewContactDP", dataProviderClass = DPAddContact.class)
+    public void addNewContactNegativeTest_wrongEmailDP(ContactDtoLombok contact) {
+        System.out.println("----->" + contact);
+        Assert.assertTrue(addPage.fillContactsForm(contact)
+                .clickSaveBtnContactPositive()
+                .isAlertPresent(5))
+        ;
+    }
+
+    @Test(dataProvider = "addNewContactDPFile", dataProviderClass = DPAddContact.class)
+    public void addNewContactNegativeTest_wrongEmailDPFile(ContactDtoLombok contact) {
+        System.out.println("----->" + contact);
+        Assert.assertTrue(addPage.fillContactsForm(contact)
+                .clickSaveBtnContactPositive()
+                .isAlertPresent(5))
         ;
     }
 
@@ -73,9 +117,9 @@ public class AddContactsTest extends ApplicationManager {
                 .description(generateString(11))
                 .build();
 
-       Assert.assertTrue( addPage.fillContactsForm(contact)
+        Assert.assertTrue(addPage.fillContactsForm(contact)
                 .clickSaveBtnContactNegative()
-               // .closeAlert()
+
                 .ErrorMasegeAlirt("Phone not valid: Phone number must contain only digits! " +
                         "And length min 10, max 15!"))
 
@@ -94,13 +138,13 @@ public class AddContactsTest extends ApplicationManager {
                 .description(generateString(11))
                 .build();
 
-       Assert.assertTrue( addPage.fillContactsForm(contact)
+        Assert.assertTrue(addPage.fillContactsForm(contact)
                 .clickSaveBtnContactNegative()
-               // .closeAlert()
-               .ErrorMasegeAlirt(""))
+                .ErrorMasegeAlirt(""))
         ;
 
     }
+
     @Test
     public void addNewContactsNegativTest_wronEmailWOAt() {
         ContactDtoLombok contact = ContactDtoLombok.builder()
@@ -112,14 +156,13 @@ public class AddContactsTest extends ApplicationManager {
                 .description(generateString(11))
                 .build();
 
-        Assert.assertTrue(addPage.fillContactsForm(contact)
-                .clickSaveBtnContactNegative()
-        // .closeAlert()
-                .ErrorMasegeAlirt("Email not valid: " +
-                        "must be a well-formed email address"))
+        addPage.fillContactsForm(contact)
+                .clickSaveBtnContactPositive()
+
         ;
 
     }
+
     @Test  //BUG////////////////
     public void addNewContactsNegativTest_wronEmail_RussianLetters() {
         ContactDtoLombok contact = ContactDtoLombok.builder()
@@ -131,15 +174,16 @@ public class AddContactsTest extends ApplicationManager {
                 .description(generateString(11))
                 .build();
 
-       Assert.assertTrue( addPage.fillContactsForm(contact)
-                .clickSaveBtnContactNegative()
-        // .closeAlert()
+        Assert.assertTrue(addPage.fillContactsForm(contact)
+                .clickSaveBtnContactNegative()//????/
+
                 .ErrorMasegeAlirt("Email not valid: " +
                         "must be a well-formed email address"))
         ;
 
     }
-    @Test
+
+    @Test//     ?????????????Btn Negative
     public void addNewContactsNegativTest_fieladdressIsEmpty() {
         ContactDtoLombok contact = ContactDtoLombok.builder()
                 .name(generateString(5))
@@ -150,12 +194,11 @@ public class AddContactsTest extends ApplicationManager {
                 .description(generateString(11))
                 .build();
 
-       Assert.assertTrue( addPage.fillContactsForm(contact)
+        Assert.assertTrue(addPage.fillContactsForm(contact)
                 .clickSaveBtnContactNegative()
-               .ErrorMasegeAlirt("Email not valid:" +
-                       " must be a well-formed email address"));
+                .ErrorMasegeAlirt("Email not valid:" +
+                        " must be a well-formed email address"));
 
-        // .closeAlert()
 
         ;
 

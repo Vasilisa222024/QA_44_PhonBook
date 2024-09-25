@@ -72,4 +72,8 @@ public class BasePage {
         System.out.println(alert.getText());
         alert.accept();
     }
+    public boolean urlContains (String urlPart,int time){
+        return new WebDriverWait(driver,Duration.ofSeconds(time))
+                .until(ExpectedConditions.urlContains(urlPart));
+    }
 }

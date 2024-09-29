@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import pages.*;
 import utils.HeaderMenuItem;
 
+import java.lang.reflect.Method;
+
 import static pages.BasePage.clickButtonsOnHeader;
 import static utils.RandomUtils.*;
 
@@ -19,6 +21,7 @@ public class AddContactsTest extends ApplicationManager {
 
     @BeforeMethod
     public void login() {
+        logger.info("start method login user random");
         HomePage homePage = new HomePage(getDriver());
         LoginPage loginPage = BasePage.clickButtonsOnHeader(HeaderMenuItem.LOGIN);
 
@@ -28,7 +31,7 @@ public class AddContactsTest extends ApplicationManager {
     }
 
     @Test
-    public void addNewContactsPositiveTest() {
+    public void addNewContactsPositiveTest(Method method) {
         ContactDtoLombok contact = ContactDtoLombok.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
@@ -37,17 +40,18 @@ public class AddContactsTest extends ApplicationManager {
                 .address(generateString(7))
                 .description(generateString(11))
                 .build();
-
+logger.info("start-->"+method.getName()+"with data:"+contact.toString());
         Assert.assertTrue(addPage.fillContactsForm(contact)
                 .clickSaveBtnContactPositive()
                 .isLastPhoneEquals(contact.getPhone()));
+
 
 
     }
 
     ///URL////////
     @Test
-    public void addNewContactsNegativTest_fielnameIsEmpty() {
+    public void addNewContactsNegativTest_fielnameIsEmpty(Method method) {
         ContactDtoLombok contact = ContactDtoLombok.builder()
                 .name(generateString(0))
                 .lastName(generateString(5))
@@ -62,7 +66,7 @@ public class AddContactsTest extends ApplicationManager {
                 .urlContainsAdd())
 
         ;
-
+logger.info("start-->"+method.getName()+"wtis data "+contact.toString());
     }
 
     //ALIRT//////////////

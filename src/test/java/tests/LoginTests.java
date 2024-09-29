@@ -46,6 +46,7 @@ public class LoginTests extends ApplicationManager {
 
     @Test
     public void loginNegativeTest_wrongEmail() {
+        logger.info("");
 //unregisterUser
         Assert.assertTrue(
                 new HomePage(getDriver())

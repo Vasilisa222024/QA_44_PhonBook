@@ -1,5 +1,7 @@
 package tests;
 
+import data_provider.DPAddContact;
+import data_provider.DPRegistration;
 import dto.UserDto;
 import manager.ApplicationManager;
 import org.testng.Assert;
@@ -46,6 +48,21 @@ public class RegistrationTest extends ApplicationManager {
                 .clickBtnRegistrationNegative()
                 .closeAllert()
                 .isTextInElementPresent_errorMessageRegistration("Registration failed with code 400")
+
+        ;
+
+
+    }
+    @Test(dataProvider = "addNewRegistration",dataProviderClass = DPRegistration.class)
+    public void registrationNegativeTest_wrongEmailDP(UserDto user) {
+        System.out.println("--> " + user);
+
+       Assert.assertTrue( new HomePage(getDriver())
+                .clickbtnLoginHeader()
+                .typeloginForm(user)
+                .clickBtnRegistrationNegative()
+               .closeAllert()
+               .isTextInElementPresent_errorMessageRegistration("Registration failed with code 400"))
 
         ;
 

@@ -6,14 +6,17 @@ import dto.UserDto;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.*;
 import utils.HeaderMenuItem;
+import utils.TestNGListner;
 
 import java.lang.reflect.Method;
 
 import static pages.BasePage.clickButtonsOnHeader;
 import static utils.RandomUtils.*;
+@Listeners(TestNGListner.class)
 
 public class AddContactsTest extends ApplicationManager {
     UserDto user = new UserDto("qa_44_qa@gmail.com", "Qaqaqa44@");

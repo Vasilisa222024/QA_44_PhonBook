@@ -4,12 +4,18 @@ package pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utils.HeaderMenuItem;
 
 import java.time.Duration;
 
 public class BasePage {
-    static WebDriver driver;
+
+
+    static  WebDriver driver;
+
+ static Logger logger = LoggerFactory.getLogger(BasePage.class);
 
     public static void setDriver(WebDriver wd) {
         driver = wd;

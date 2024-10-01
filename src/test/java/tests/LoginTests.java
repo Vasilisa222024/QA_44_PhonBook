@@ -1,13 +1,19 @@
 package tests;
 
 import manager.ApplicationManager;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
+import utils.TestNGListner;
 
 import static pages.BasePage.clickButtonsOnHeader;
+
+@Listeners(TestNGListner.class)
+
 
 public class LoginTests extends ApplicationManager {
     @Test

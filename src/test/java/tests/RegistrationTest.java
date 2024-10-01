@@ -5,11 +5,14 @@ import data_provider.DPRegistration;
 import dto.UserDto;
 import manager.ApplicationManager;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import utils.TestNGListner;
 
 import static utils.RandomUtils.generateEmail;
 import static utils.RandomUtils.generateString;
+@Listeners(TestNGListner.class)
 
 public class RegistrationTest extends ApplicationManager {
     @Test

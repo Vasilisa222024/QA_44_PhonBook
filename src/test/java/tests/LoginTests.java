@@ -1,6 +1,7 @@
 package tests;
 
 import manager.ApplicationManager;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -11,6 +12,7 @@ import utils.HeaderMenuItem;
 import utils.TestNGListner;
 
 import static pages.BasePage.clickButtonsOnHeader;
+import static utils.TakeScreenShot.takeScreenShot;
 
 @Listeners(TestNGListner.class)
 
@@ -25,6 +27,7 @@ public class LoginTests extends ApplicationManager {
                                 ("qa_44_qa@gmail.com", "Qaqaqa44@")
                         .clickBtnLoginPositive()
                         .isElementContactsPresent();
+        takeScreenShot((TakesScreenshot) getDriver());
         Assert.assertTrue(res);
 //Assert.assertEquals (100, 200);
 //Assert.assertTrue(true);

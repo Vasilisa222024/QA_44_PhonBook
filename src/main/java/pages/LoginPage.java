@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.bouncycastle.cms.RecipientId.password;
-
 public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         setDriver(driver);
@@ -26,7 +24,7 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//input[@name='password']")
     WebElement inputPassword;
     @FindBy(xpath = "//button[@name='login']")
-    WebElement btnLoginsumbit;//qa_44_qa@gmail.com//Qaqaqa44@
+    WebElement btnLoginSumbit;//qa_44_qa@gmail.com//Qaqaqa44@
     @FindBy(xpath = "//button[@name='registration']")
     WebElement btnRegsumbit;
     //NEGATIVE MASEGE
@@ -49,22 +47,27 @@ public class LoginPage extends BasePage {
     }
 
     public ContactPage clickBtnLoginPositive() {
-        btnLoginsumbit.click();
+        btnLoginSumbit.click();
+        pause(3);
         return new ContactPage(driver);
     }
 
     public LoginPage clickBtnLoginNegative() {
-        btnLoginsumbit.click();
+        btnLoginSumbit.click();
         return this;
     }
 
+    public  void clickBtnLogin()
+    {
+        btnLoginSumbit.click();
+    }
     public ContactPage clickBtnRegistrationPositiv() {
         btnRegsumbit.click();
         return new ContactPage(driver);
     }
 
     public LoginPage closeAllert() {
-        pause(3);
+        //pause(3);
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.alertIsPresent());
         System.out.println(alert.getText());

@@ -13,11 +13,12 @@ import java.time.Duration;
 public class BasePage {
 
 
-    static  WebDriver driver;
+    static WebDriver driver;
 
- static Logger logger = LoggerFactory.getLogger(BasePage.class);
+    static Logger logger = LoggerFactory.getLogger(BasePage.class);
 
     public static void setDriver(WebDriver wd) {
+
         driver = wd;
     }
 
@@ -45,7 +46,7 @@ public class BasePage {
             // WebElement element = driver.findElement(By.xpath(headerMenuItem.getLocator()));
             element.click();
 
-        }catch (TimeoutException timeoutException){
+        } catch (TimeoutException timeoutException) {
             timeoutException.printStackTrace();
             System.out.println(" created timeoutException");
         }
@@ -72,14 +73,21 @@ public class BasePage {
 
         }
     }
+
     public void closeAlert() {
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(3))
                 .until(ExpectedConditions.alertIsPresent());
         System.out.println(alert.getText());
         alert.accept();
     }
-    public boolean urlContains (String urlPart,int time){
-        return new WebDriverWait(driver,Duration.ofSeconds(time))
+
+    public boolean urlContains(String urlPart, int time) {
+        return new WebDriverWait(driver, Duration.ofSeconds(time))
                 .until(ExpectedConditions.urlContains(urlPart));
+    }
+
+    public void clickWait(WebElement element, int time) {
+        new WebDriverWait(driver, Duration.ofSeconds(time))
+                .until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 }

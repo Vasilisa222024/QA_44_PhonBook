@@ -21,13 +21,13 @@ import static utils.RandomUtils.*;
 public class AddContactsTest extends ApplicationManager {
     UserDto user = new UserDto("qa_44_qa@gmail.com", "Qaqaqa44@");
     AddPage addPage;
+    ContactPage contactPage;
 
     @BeforeMethod
     public void login() {
         logger.info("start method login user random");
         HomePage homePage = new HomePage(getDriver());
         LoginPage loginPage = BasePage.clickButtonsOnHeader(HeaderMenuItem.LOGIN);
-
         loginPage.typeloginForm(user).clickBtnLoginPositive();
         addPage = clickButtonsOnHeader(HeaderMenuItem.ADD);
 

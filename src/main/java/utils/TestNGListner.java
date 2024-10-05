@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import static utils.TakeScreenShot.takeScreenShot;
+
 
 public class TestNGListner  implements ITestListener {
 
@@ -12,13 +14,14 @@ public class TestNGListner  implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
-        logger.info("start test---->"+result.getMethod());
+        logger.info("start test---->"+result.getMethod()+" "+result.getTestName());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         ITestListener.super.onTestSuccess(result);
         logger.info("success test---->"+result.getMethod());
+
     }
 
     @Override
@@ -47,7 +50,7 @@ public class TestNGListner  implements ITestListener {
     public void onStart(ITestContext context) {
         ITestListener.super.onStart(context);
         logger.info("start testing on date---->"+context.getStartDate()+"====================");
-        logger.info("start testing on host----->"+ context.getHost()+"====================");
+       // logger.info("start testing on host----->"+ context.getHost()+"====================");
     }
 
     @Override
